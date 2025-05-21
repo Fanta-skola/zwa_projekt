@@ -5,7 +5,7 @@ require "./db/skins.php";
 
 if (isset($_POST["deleteskin"])) {
     if (!isset($_SESSION["loggedInUser"])) {
-        header("Location: /Projekt");
+        header("Location: /zwa_projekt");
         exit;
     }
     deleteskin($db, $_POST["id"]);
@@ -13,7 +13,7 @@ if (isset($_POST["deleteskin"])) {
 
 if (isset($_POST["editskin"])) {
     if (!isset($_SESSION["loggedInUser"])) {
-        header("Location: /Projekt");
+        header("Location: /zwa_projekt");
         exit;
     }
     editskin(

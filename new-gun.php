@@ -4,7 +4,7 @@ require "./utils/init.php";
 require "./db/guns.php";
 
 if (!isset($_SESSION["loggedInUser"])) {
-    header("Location: /Projekt");
+    header("Location: /zwa_projekt");
     exit;
 }
 

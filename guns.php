@@ -5,7 +5,7 @@ require "./db/guns.php";
 
 if (isset($_POST["deletegun"])) {
     if (!isset($_SESSION["loggedInUser"])) {
-        header("Location: /Projekt");
+        header("Location: /zwa_projekt");
         exit;
     }
     deletegun($db, $_POST["id"]);
@@ -13,7 +13,7 @@ if (isset($_POST["deletegun"])) {
 
 if (isset($_POST["editgun"])) {
     if (!isset($_SESSION["loggedInUser"])) {
-        header("Location: /Projekt");
+        header("Location: /zwa_projekt");
         exit;
     }
     editgun(
