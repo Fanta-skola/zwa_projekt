@@ -1,0 +1,57 @@
+<h2>Seznam zbraní</h2>
+
+<?php if (isset($_SESSION["loggedInUser"])) { ?>
+    <a href="/Projekt/new-gun.php">Přidat zbraň</a>
+<?php } ?>
+
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Jméno</th>
+        <th>Cena</th>
+        <th>Obrázek</th>
+        <th>Datum a čas vytvoření</th>
+        <?php if (isset($_SESSION["loggedInUser"])) { ?>
+            <th>Akce</th>
+        <?php } ?>
+    </thead>
+    <tbody>
+        <?php
+            foreach ($guns as $gun) {
+        ?>
+            <tr>
+                <td><?= $gun["id"] ?></td>
+                <td><?= $gun["name"] ?></td>
+                <td><?= $gun["price"] ?></td>
+                <td>
+                    <?php if ($gun["image_path"] !== null) { ?>
+                        <img 
+                            src="<?= $gun["image_path"] ?>" 
+                            width="100" 
+                            height="100"
+                        >
+                    <?php } else { ?>
+                        x
+                    <?php } ?>
+                </td>
+                <td>
+                    <?= date("j. n. Y G:i", strtotime($gun["created_at"])) ?>
+                </td>
+                <!-- <?php if (isset($_SESSION["loggedInUser"])) { ?> -->
+                <td>
+                    <form method="GET">
+                        <input type="hidden" name="id" value="<?= $gun["id"] ?>">
+                        <button>Upravit</button>
+                    </form>
+                    <form method="POST">
+                        <input type="hidden" name="id" value="<?= $gun["id"] ?>">
+                        <button name="deletegun">Odstranit</button>
+                    </form>
+                </td>
+                <!-- <?php } ?> -->
+            </tr>
+        <?php
+            }
+        ?>
+    </tbody>
+</table>

@@ -1,0 +1,57 @@
+<h2>Seznam skinů</h2>
+
+<?php if (isset($_SESSION["loggedInUser"])) { ?>
+    <a href="/Projekt/new-skin.php">Přidat skin</a>
+<?php } ?>
+
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Jméno</th>
+        <th>Cena</th>
+        <th>Obrázek</th>
+        <th>Datum a čas vytvoření</th>
+        <?php if (isset($_SESSION["loggedInUser"])) { ?>
+            <th>Akce</th>
+        <?php } ?>
+    </thead>
+    <tbody>
+        <?php
+            foreach ($skins as $skin) {
+        ?>
+            <tr>
+                <td><?= $skin["id"] ?></td>
+                <td><?= $skin["name"] ?></td>
+                <td><?= $skin["price"] ?></td>
+                <td>
+                    <?php if ($skin["image_path"] !== null) { ?>
+                        <img 
+                            src="<?= $skin["image_path"] ?>" 
+                            width="100" 
+                            height="100"
+                        >
+                    <?php } else { ?>
+                        x
+                    <?php } ?>
+                </td>
+                <td>
+                    <?= date("j. n. Y G:i", strtotime($skin["created_at"])) ?>
+                </td>
+                <!-- <?php if (isset($_SESSION["loggedInUser"])) { ?> -->
+                <td>
+                    <form method="GET">
+                        <input type="hidden" name="id" value="<?= $skin["id"] ?>">
+                        <button>Upravit</button>
+                    </form>
+                    <form method="POST">
+                        <input type="hidden" name="id" value="<?= $skin["id"] ?>">
+                        <button name="deleteskin">Odstranit</button>
+                    </form>
+                </td>
+                <!-- <?php } ?> -->
+            </tr>
+        <?php
+            }
+        ?>
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+<?php
+    $firstVisit = !isset($_COOKIE["first"]);
+    setcookie("first", "true");
+?>
+
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CS2 Skiny</title>
+    </head>
+    <body>
+        <header>
+            <h1>Databaze na CS2 skiny</h1>
+
+            <?php
+                if ($firstVisit) {
+            ?>
+                    <p>
+                       Vítej. Za první příchod na tuto stránku obdržíš promocode : 100k (lze uplatnit na strance <a href="https://csgo.net">CSGO.net</a>)
+                    </p>
+            <?php
+                }
+            ?>
+
+            <nav>
+                <ul>
+                    <li><a href="/Projekt">Domů</a></li>
+                    <li><a href="/Projekt/skins.php">Seznam skinů</a></li>
+                    <li><a href="/Projekt/guns.php">Seznam zbraní</a></li>
+
+                    <?php if (!isset($_SESSION["loggedInUser"])) { ?>
+                        <li><a href="/Projekt/register.php">Registrovat se</a></li>
+                        <li><a href="/Projekt/login.php">Přihlásit se</a></li>
+                    <?php } else { ?>
+                       <li>
+    <?php 
+        $username = htmlspecialchars($_SESSION["loggedInUser"]["username"]);
+        if (!empty($_SESSION["loggedInUser"]["is_admin"]) && $_SESSION["loggedInUser"]["is_admin"]) {
+            echo "<span style='color: red;'>$username (admin)</span>";
+        } else {
+            echo $username;
+        }
+    ?>
+</li>
+
+                        <li><a href="/Projekt/logout.php">Odhlásit se</a></li>
+                    <?php } ?>
+                </ul>
+            </nav>
+        </header>

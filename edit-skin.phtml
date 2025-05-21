@@ -1,0 +1,18 @@
+<h1>Editace skinu <?= $skin["id"] ?></h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <div>
+        <label for="name">Jméno</label>
+        <input type="text" name="name" id="name" required value="<?= $skin["name"] ?>">
+    </div>
+    <div>
+        <label for="price">Cena</label>
+        <input type="number" name="price" id="price" required value="<?= $skin["price"] ?>">
+    </div>
+    <div>
+        <label for="image">Obrázek</label>
+        <input type="file" accept="image/*" name="image" id="image">
+    </div>
+
+    <button name="editskin">Upravit skin</button>
+</form>

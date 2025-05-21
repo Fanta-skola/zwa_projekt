@@ -1,0 +1,18 @@
+<h1>Editace zbraně <?= $gun["id"] ?></h1>
+
+<form method="POST" enctype="multipart/form-data">
+    <div>
+        <label for="name">Jméno</label>
+        <input type="text" name="name" id="name" required value="<?= $gun["name"] ?>">
+    </div>
+    <div>
+        <label for="price">Cena</label>
+        <input type="number" name="price" id="price" required value="<?= $gun["surname"] ?>">
+    </div>
+    <div>
+        <label for="image">Obrázek</label>
+        <input type="file" accept="image/*" name="image" id="image">
+    </div>
+
+    <button name="editgun">Upravit zbraň</button>
+</form>
