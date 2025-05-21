@@ -27,14 +27,15 @@
 
             <nav>
                 <ul>
-                    <li><a href="/Projekt">Domů</a></li>
-                    <li><a href="/Projekt/skins.php">Seznam skinů</a></li>
-                    <li><a href="/Projekt/guns.php">Seznam zbraní</a></li>
-
+                    <li><a href="/zwa_projekt">Domů</a></li>
+                    <li><a href="/zwa_projekt/skins.php">Seznam skinů</a></li>
+                    <li><a href="/zwa_projekt/guns.php">Seznam zbraní</a></li>
                     <?php if (!isset($_SESSION["loggedInUser"])) { ?>
-                        <li><a href="/Projekt/register.php">Registrovat se</a></li>
-                        <li><a href="/Projekt/login.php">Přihlásit se</a></li>
+                        <li><a href="/zwa_projekt/register.php">Registrovat se</a></li>
+                        <li><a href="/zwa_projekt/login.php">Přihlásit se</a></li>
                     <?php } else { ?>
+                                                <li><a href="/zwa_projekt/vlastnene_skiny.php">Seznam tvých skinů</a></li>
+
                        <li>
     <?php 
         $username = htmlspecialchars($_SESSION["loggedInUser"]["username"]);
@@ -46,7 +47,7 @@
     ?>
 </li>
 
-                        <li><a href="/Projekt/logout.php">Odhlásit se</a></li>
+                        <li><a href="/zwa_projekt/logout.php">Odhlásit se</a></li>
                     <?php } ?>
                 </ul>
             </nav>
