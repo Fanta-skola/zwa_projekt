@@ -6,7 +6,7 @@ session_start();
 
 mysqli_report(MYSQLI_REPORT_OFF);
 
-$db = mysqli_connect("localhost", "root", "", "projekt");
+$db = mysqli_connect("localhost", "root", "", "zwa_projekt");
 if ($db === false) {
     echo "<p>Připojení k databázi bylo neúspěšné</p>";
     exit;
