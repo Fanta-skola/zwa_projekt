@@ -1,4 +1,11 @@
-Databáze na CS2 skiny
+CS2 Skins Database
 
-Školní projekt pro stránku s databází.
-Stránka na prohlížení všech skinů a zbraní z CS2 a svých vlastněných skinů.
+School project for a database page.
+A page to view all skins and weapons from CS2 and your own skins.
+
+How to insall:
+You will need XAMPP installed.
+Insert zwa_projekt into C:\xampp\htdocs.
+start Apache and MySQL.
+Import the sql skript to phpmyadmin (http://localhost/phpmyadmin/index.php)
+now you can go to the page (http://localhost/zwa_projekt/)
