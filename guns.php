@@ -19,6 +19,7 @@ if (isset($_POST["editgun"])) {
     editgun(
         $db,
         $_GET["id"],
+        $_POST["type"],
         $_POST["name"], 
         $_POST["price"],
         $_FILES["image"]
@@ -31,7 +32,7 @@ if (isset($_GET["id"])) {
     $gun = getgun($db, $_GET["id"]);
     require "./edit-gun.phtml";
 } else {
-    $gun = listgun($db);
+    $guns = listgun($db);
     require "./guns.phtml";
 }
 
