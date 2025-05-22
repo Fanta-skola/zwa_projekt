@@ -4,13 +4,13 @@
     <a href="/zwa_projekt/new-gun.php">Přidat zbraň</a>
 <?php } ?>
 
-<table>
+<table border = 1>
     <thead>
         <th>ID</th>
         <th>Jméno</th>
+        <th>Typ</th>
         <th>Cena</th>
         <th>Obrázek</th>
-        <th>Datum a čas vytvoření</th>
         <?php if (isset($_SESSION["loggedInUser"])) { ?>
             <th>Akce</th>
         <?php } ?>
@@ -21,21 +21,19 @@
         ?>
             <tr>
                 <td><?= $gun["id"] ?></td>
-                <td><?= $gun["name"] ?></td>
-                <td><?= $gun["price"] ?></td>
+                <td><?= $gun["Name"] ?></td>
+                 <td><?= $gun["type"] ?></td>
+                <td><?= $gun["Price"] ?></td>
                 <td>
-                    <?php if ($gun["image_path"] !== null) { ?>
+                    <?php if ($gun["img"] !== null) { ?>
                         <img 
-                            src="<?= $gun["image_path"] ?>" 
+                            src="<?= $gun["img"] ?>" 
                             width="100" 
                             height="100"
                         >
                     <?php } else { ?>
                         x
                     <?php } ?>
-                </td>
-                <td>
-                    <?= date("j. n. Y G:i", strtotime($gun["created_at"])) ?>
                 </td>
                 <!-- <?php if (isset($_SESSION["loggedInUser"])) { ?> -->
                 <td>

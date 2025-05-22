@@ -9,7 +9,7 @@ if (!isset($_SESSION["loggedInUser"])) {
 }
 
 if (isset($_POST["newgun"])) {
-    addskin($db, $_POST["name"], $_POST["gun"], $_FILES["image"]);
+    addgun($db,$_POST["name"],$_POST["price"], $_POST["type"], $_FILES["image"]);
 }
 
 require "./layout/head.phtml";

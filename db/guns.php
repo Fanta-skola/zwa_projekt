@@ -2,7 +2,7 @@
 
 $imageFolder = "gun-img";
 
-function addgun($db, $name, $price, $image) {
+function addgun($db, $name, $price, $type, $image) {
     global $imageFolder;
 
     $imagePath = null;
@@ -27,16 +27,16 @@ function addgun($db, $name, $price, $image) {
 
     $stmt = mysqli_prepare($db, "
         INSERT INTO guns
-        (name, price, img)
+        (type, name, img, Price)
         VALUES
-        (?, ?, ?)
+        (?, ?, ?, ?)
     ");
     if ($stmt === false) {
         echo "<p>Nastala chyba s přidáním zbraně</p>";
         echo "<p>" . mysqli_error($db) . "</p>";
         exit;
     }
-    mysqli_stmt_bind_param($stmt, "sis", $name, $price, $imagePath);
+    mysqli_stmt_bind_param($stmt, "sssi", $type, $name, $imagePath, $price);
     $result = mysqli_execute($stmt);
 
     if ($result === false) {
@@ -83,7 +83,7 @@ function listgun($db) {
     }
 }
 
-function editgun($db, $id, $name, $price, $image) {
+function editgun($db, $id,$type, $name, $price, $image) {
     global $imageFolder;
 
     $imagePath = null;
@@ -108,7 +108,7 @@ function editgun($db, $id, $name, $price, $image) {
 
     $stmt = mysqli_prepare($db, "
         UPDATE guns
-        SET name = ?, price = ?, img = ?
+        SET name = ?,type = ?, price = ?, img = ?
         WHERE id = ?
     ");
     if ($stmt === false) {
@@ -116,7 +116,7 @@ function editgun($db, $id, $name, $price, $image) {
         echo "<p>" . mysqli_error($db) . "</p>";
         exit;
     }
-    mysqli_stmt_bind_param($stmt, "sisi", $name, $price, $imagePath, $id);
+    mysqli_stmt_bind_param($stmt, "ssisi", $name,$type, $price, $imagePath, $id);
     $result = mysqli_execute($stmt);
 
     if ($result === false) {
