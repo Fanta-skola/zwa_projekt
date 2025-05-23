@@ -20,6 +20,7 @@ if (isset($_POST["editskin"])) {
         $db,
         $_GET["id"],
         $_POST["name"], 
+        $_POST["type"],
         $_POST["price"],
         $_FILES["image"]
     );
@@ -31,7 +32,7 @@ if (isset($_GET["id"])) {
     $skin = getskin($db, $_GET["id"]);
     require "./edit-skin.phtml";
 } else {
-    $skin = listskins($db);
+    $skins = listskins($db);
     require "./skins.phtml";
 }
 

@@ -1,5 +1,5 @@
 <h1>Editace skinu <?= $skin["id"] ?></h1>
-
+<?php $type = listguntype($db);?>
 <form method="POST" enctype="multipart/form-data">
     <div>
         <label for="name">Jméno</label>
@@ -8,6 +8,17 @@
     <div>
         <label for="price">Cena</label>
         <input type="number" name="price" id="price" required value="<?= $skin["price"] ?>">
+    </div>
+      <div>
+        <label for="type">Typ zbraně</label>
+    <select name="type" id="type" required>
+    <?php foreach ($type as $guntype): ?>
+        <option value="<?= $guntype['id']?>" 
+            <?= ($guntype['id'] == $skin['type']) ? 'selected' : '' ?>>
+            <?= htmlspecialchars($guntype['name']) ?>
+        </option>
+    <?php endforeach; ?>
+</select>
     </div>
     <div>
         <label for="image">Obrázek</label>

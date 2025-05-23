@@ -2,7 +2,7 @@
 
 $imageFolder = "skins-img";
 
-function addskin($db, $name, $price, $image) {
+function addskin($db, $name,$type, $price, $image) {
     global $imageFolder;
 
     $imagePath = null;
@@ -27,16 +27,16 @@ function addskin($db, $name, $price, $image) {
 
     $stmt = mysqli_prepare($db, "
         INSERT INTO skins
-        (name, price, img)
+        (name, type, price, img)
         VALUES
-        (?, ?, ?)
+        (?, ?, ?, ?)
     ");
     if ($stmt === false) {
         echo "<p>Nastala chyba s přidáním skinu</p>";
         echo "<p>" . mysqli_error($db) . "</p>";
         exit;
     }
-    mysqli_stmt_bind_param($stmt, "sis", $name, $price, $imagePath);
+    mysqli_stmt_bind_param($stmt, "siis", $name,$type, $price, $imagePath);
     $result = mysqli_execute($stmt);
 
     if ($result === false) {
@@ -70,9 +70,10 @@ function getskin($db, $id) {
 
 function listskins($db) {
     $result = mysqli_query($db, "
-        SELECT *
-        FROM skins
-        ORDER BY id ASC;
+        SELECT skins.*, guns.name AS type_name
+FROM skins
+LEFT JOIN guns ON skins.type = guns.id
+ORDER BY skins.id ASC;
     ");
     if ($result === false) {
         echo "<p>Nastala chyba se získáním skinu</p>";
@@ -83,7 +84,7 @@ function listskins($db) {
     }
 }
 
-function editskin($db, $id, $name, $price, $image) {
+function editskin($db,$id, $name,$type, $price, $image) {
     global $imageFolder;
 
     $imagePath = null;
@@ -108,7 +109,7 @@ function editskin($db, $id, $name, $price, $image) {
 
     $stmt = mysqli_prepare($db, "
         UPDATE skins
-        SET name = ?, price = ?, img = ?
+        SET name = ?,type = ?, price = ?, img = ?
         WHERE id = ?
     ");
     if ($stmt === false) {
@@ -116,7 +117,7 @@ function editskin($db, $id, $name, $price, $image) {
         echo "<p>" . mysqli_error($db) . "</p>";
         exit;
     }
-    mysqli_stmt_bind_param($stmt, "sisi", $name, $price, $imagePath, $id);
+    mysqli_stmt_bind_param($stmt, "siisi", $name,$type, $price, $imagePath, $id);
     $result = mysqli_execute($stmt);
 
     if ($result === false) {
@@ -144,4 +145,13 @@ function deleteskin($db, $id) {
         echo "<p>" . mysqli_error($db) . "</p>";
         exit;
     }
+}
+
+function listguntype($db) {
+    $result = mysqli_query($db, "SELECT * FROM guns");
+    if ($result === false) {
+        echo "<p>Chyba při načítání typů zbraní</p>";
+        return [];
+    }
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
