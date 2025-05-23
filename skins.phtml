@@ -4,13 +4,13 @@
     <a href="/zwa_projekt/new-skin.php">Přidat skin</a>
 <?php } ?>
 
-<table>
+<table border = 1>
     <thead>
         <th>ID</th>
         <th>Jméno</th>
         <th>Cena</th>
+        <th>Typ</th>
         <th>Obrázek</th>
-        <th>Datum a čas vytvoření</th>
         <?php if (isset($_SESSION["loggedInUser"])) { ?>
             <th>Akce</th>
         <?php } ?>
@@ -23,19 +23,17 @@
                 <td><?= $skin["id"] ?></td>
                 <td><?= $skin["name"] ?></td>
                 <td><?= $skin["price"] ?></td>
+                <td><?= $skin["type_name"] ?></td>
                 <td>
-                    <?php if ($skin["image_path"] !== null) { ?>
+                    <?php if ($skin["img"] !== null) { ?>
                         <img 
-                            src="<?= $skin["image_path"] ?>" 
+                            src="<?= $skin["img"] ?>" 
                             width="100" 
                             height="100"
                         >
                     <?php } else { ?>
                         x
                     <?php } ?>
-                </td>
-                <td>
-                    <?= date("j. n. Y G:i", strtotime($skin["created_at"])) ?>
                 </td>
                 <!-- <?php if (isset($_SESSION["loggedInUser"])) { ?> -->
                 <td>

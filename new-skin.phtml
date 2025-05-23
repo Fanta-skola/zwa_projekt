@@ -10,6 +10,14 @@
         <input type="number" name="price" id="price" required>
     </div>
     <div>
+        <label for="type">Typ zbraně</label>
+        <select name="type" id="type" required>
+            <?php foreach ($type as $guntype): ?>
+  <option value="<?= $guntype['id']?>"><?= htmlspecialchars($guntype['name']) ?></option>
+  <?php endforeach;?>
+</select>
+    </div>
+    <div>
         <label for="image">Obrázek</label>
         <input type="file" accept="image/*" name="image" id="image">
     </div>

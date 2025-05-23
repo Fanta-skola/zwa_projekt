@@ -7,9 +7,10 @@ if (!isset($_SESSION["loggedInUser"])) {
     header("Location: /zwa_projekt");
     exit;
 }
+$type = listguntype($db);
 
 if (isset($_POST["newskin"])) {
-    addskin($db, $_POST["name"], $_POST["skin"], $_FILES["image"]);
+    addskin($db, $_POST["name"],$_POST["type"], $_POST["price"], $_FILES["image"]);
 }
 
 require "./layout/head.phtml";
