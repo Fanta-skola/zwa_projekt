@@ -62,21 +62,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `zwa_projekt`.`owned_skins`
+-- Table `zwa_projekt`.`user_skins`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zwa_projekt`.`owned_skins` (
+CREATE TABLE IF NOT EXISTS `zwa_projekt`.`user_skins` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `id_user` INT NOT NULL,
   `id_skin` INT NOT NULL,
   PRIMARY KEY (`id`, `id_user`, `id_skin`),
-  INDEX `fk_owned_skins_Users1_idx` (`id_user` ASC),
-  INDEX `fk_owned_skins_skins1_idx` (`id_skin` ASC),
-  CONSTRAINT `fk_owned_skins_Users1`
+  INDEX `fk_user_skins_Users1_idx` (`id_user` ASC),
+  INDEX `fk_user_skins_skins1_idx` (`id_skin` ASC),
+  CONSTRAINT `fk_user_skins_Users1`
     FOREIGN KEY (`id_user`)
     REFERENCES `zwa_projekt`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_owned_skins_skins1`
+  CONSTRAINT `fk_user_skins_skins1`
     FOREIGN KEY (`id_skin`)
     REFERENCES `zwa_projekt`.`skins` (`id`)
     ON DELETE NO ACTION
