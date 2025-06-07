@@ -49,7 +49,7 @@ function listuskins($db) {
         SELECT user_skins.*, skins.name AS skin_name, users.username AS user_name
 FROM user_skins
 LEFT JOIN skins ON user_skins.id_skin = skins.id
-LEFT JOIN users ON user_skins.id_user = user.id
+LEFT JOIN users ON user_skins.id_user = users.id
 ORDER BY skins.id ASC;
     ");
     if ($result === false) {
@@ -61,10 +61,10 @@ ORDER BY skins.id ASC;
     }
 }
 
-function edituskin($db,$id, $user, $skin) {
+function edituskin($db,$id, $skin) {
     $stmt = mysqli_prepare($db, "
         UPDATE user_skins
-        SET id_user = ?, id_skin = ?
+        SET id_skin = ?
         WHERE id = ?
     ");
     if ($stmt === false) {
@@ -72,7 +72,7 @@ function edituskin($db,$id, $user, $skin) {
         echo "<p>" . mysqli_error($db) . "</p>";
         exit;
     }
-    mysqli_stmt_bind_param($stmt, "iii", $user,$skin, $id);
+    mysqli_stmt_bind_param($stmt, "ii",$skin, $id);
     $result = mysqli_execute($stmt);
 
     if ($result === false) {
@@ -103,9 +103,17 @@ function deleteuskin($db, $id) {
 }
 
 function listuserskin($db) {
-    $result = mysqli_query($db, "SELECT * FROM guns");
+    $result = mysqli_query($db, "SELECT * FROM user_skins");
     if ($result === false) {
-        echo "<p>Chyba při načítání typů zbraní</p>";
+        echo "<p>Chyba při načítání skinů</p>";
+        return [];
+    }
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function listusers($db) {
+    $result = mysqli_query($db, "SELECT id, username FROM users ORDER BY username ASC");
+    if ($result === false) {
+        echo "<p>Chyba při načítání uživatelů</p>";
         return [];
     }
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
