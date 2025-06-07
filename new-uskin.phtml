@@ -1,0 +1,15 @@
+<h2>Přidání nového skinu</h2>
+
+<form method="POST">
+    <div>
+        <label for="skin">Vyberte skin:</label>
+        <select name="skin" id="skin" required>
+            <?php foreach ($skins as $skin): ?>
+                <option value="<?= htmlspecialchars($skin['id']) ?>">
+                    <?= htmlspecialchars($skin['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <button name="newuskin" type="submit">Přidat skin</button>
+</form>
