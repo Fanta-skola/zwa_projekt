@@ -1,0 +1,39 @@
+<h2>Seznam skinů uživatelů</h2>
+
+<?php if (isset($_SESSION["loggedInUser"])) { ?>
+    <a href="/zwa_projekt/new-uskin.php">Přidat skin</a>
+<?php } ?>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Uživatel</th>
+            <th>Skin</th>
+            <?php if (isset($_SESSION["loggedInUser"])) { ?>
+                <th>Akce</th>
+            <?php } ?>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($uskins as $uskin) { ?>
+            <tr>
+                <td><?= htmlspecialchars($uskin["id"]) ?></td>
+                <td><?= htmlspecialchars($uskin["user_name"]) ?></td>
+                <td><?= htmlspecialchars($uskin["skin_name"]) ?></td>
+                <?php if (isset($_SESSION["loggedInUser"])) { ?>
+                    <td>
+                        <form method="GET" style="display:inline;">
+                            <input type="hidden" name="id" value="<?= $uskin["id"] ?>">
+                            <button type="submit">Upravit</button>
+                        </form>
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="id" value="<?= $uskin["id"] ?>">
+                            <button type="submit" name="deleteuskin">Odstranit</button>
+                        </form>
+                    </td>
+                <?php } ?>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>

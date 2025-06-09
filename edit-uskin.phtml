@@ -1,0 +1,17 @@
+<h1>Editace skinu uživatele <?= htmlspecialchars($uskin["id"]) ?></h1>
+
+<form method="POST">
+    <div>
+        <label for="skin">Skin</label>
+        <select name="skin" id="skin" required>
+            <?php foreach ($skins as $skin): ?>
+                <option value="<?= htmlspecialchars($skin['id']) ?>"
+                    <?= ($skin['id'] == $uskin['id_skin']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($skin['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <button name="edituskin" type="submit">Upravit skin uživatele</button>
+</form>
